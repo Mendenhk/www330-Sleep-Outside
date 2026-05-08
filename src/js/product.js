@@ -9,7 +9,7 @@ function addProductToCart(product) {
   // cartItems.push(product);
   // localStorage.setItem("so-cart", JSON.stringify(cartItems));
   // setLocalStorage("so-cart", product);  //original code replaced by above three lines (to be deleted)
-  //below, the actual solution.  Note that JSON conversion is missing.  These are handled by the function setLocalStorage().  
+  //below, the actual solution.  Note that JSON conversion is missing.  These are handled by the function setLocalStorage().
   const cartItems = getLocalStorage("so-cart") || []; // get cart array of items from local storage if null set to empty array
   cartItems.push(product);
   setLocalStorage("so-cart", cartItems);
