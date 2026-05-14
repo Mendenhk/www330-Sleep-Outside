@@ -1,3 +1,4 @@
+//following class extracts JSON files
 export default class ProductList {
   constructor(category, dataSource, listElement) {
     this.category = category;
@@ -5,6 +6,6 @@ export default class ProductList {
     this.listElement = listElement;
   }
   async init() {
-    const list = await this.dataSource.getData();
+    const list = await fetch(this.dataSource);
   }
 }
