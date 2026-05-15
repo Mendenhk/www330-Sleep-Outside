@@ -6,6 +6,6 @@ export default class ProductList {
     this.listElement = listElement;
   }
   async init() {
-    const list = await fetch(this.dataSource);
+    const list = await fetch(this.dataSource).getData();
   }
 }
