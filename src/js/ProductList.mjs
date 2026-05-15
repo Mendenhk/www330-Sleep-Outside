@@ -1,4 +1,4 @@
-
+import { renderListWithTemplate } from "./utils.mjs";
 
 
 function productCardTemplate(product) {
