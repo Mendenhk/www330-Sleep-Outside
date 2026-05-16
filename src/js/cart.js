@@ -2,9 +2,36 @@ import { getLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  document.querySelector(".products").innerHTML += `<div class="cart-footer">
+  <p class="cart-total"> </p></div>`;
+
+  if (cartItems == null) {
+    console.log("localStorage array is null.")
+  } else {
+    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+    document.querySelector(".product-list").innerHTML = htmlItems.join("");
+
+    const TotalCost = costSumTotal()
+    const DisplayElement = document.querySelector(".cart-footer")
+    if (DisplayElement.style.display === 0) {
+      DisplayElement.style.display = "block"
+    }
+
+    const totalCostElement = document.querySelector(".cart-total");
+    totalCostElement.textContent = `Total: $${TotalCost}`
+  }
 }
+
+
+
+function costSumTotal() {
+  const cartItems = getLocalStorage("so-cart");
+
+  const totalSum = cartItems.reduce((acc, items) => {
+    return acc + (Number(items.FinalPrice) || 0)
+  }, 0);
+  return totalSum
+};
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
