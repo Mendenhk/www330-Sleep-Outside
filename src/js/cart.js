@@ -1,13 +1,32 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart");
+  const cartItems = getLocalStorage("so-cart") || [];
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
+
+  // im: Attach event listeners to all remove buttons
+  const removeButtons = document.querySelectorAll(".cart-card__remove");
+  removeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      removeFromCart(button.dataset.id);
+    });
+  });
+}
+// im: Remove an item from the cart
+function removeFromCart(id) {
+  let cartItems = getLocalStorage("so-cart") || [];
+  const itemIndex = cartItems.findIndex((item) => item.Id === id);
+  if (itemIndex > -1) {
+    cartItems.splice(itemIndex, 1);
+    setLocalStorage("so-cart", cartItems);
+    renderCartContents();
+  }
 }
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
+  <span class="cart-card__remove" data-id="${item.Id}">❌</span>
   <a href="#" class="cart-card__image">
     <img
       src="${item.Image}"
