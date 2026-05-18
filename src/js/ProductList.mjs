@@ -5,7 +5,7 @@ function productCardTemplate(product) {
       <h2 class="card__brand"></h2>
       <h3 class="card__name"></h3>
       <p class="product-card__price">$</p>
-      <p class="product-card__discount">Kenobi</p>
+      <p class="product-card__discount"></p>
     </a>
   </li>`
 }
