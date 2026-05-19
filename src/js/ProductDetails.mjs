@@ -18,7 +18,18 @@ export default class ProductDetails {
 
   addProductToCart() {
     const cartItems = getLocalStorage("so-cart") || [];
-    cartItems.push(this.product);
+    // Check if product already exists in cart
+    const existingItem = cartItems.find((item) => item.Id === this.product.Id);
+    
+    if (existingItem) {
+      // If product exists, increment quantity
+      existingItem.quantity = (existingItem.quantity || 1) + 1;
+    } else {
+      // If product doesn't exist, add it with quantity 1
+      this.product.quantity = 1;
+      cartItems.push(this.product);
+    }
+    
     setLocalStorage("so-cart", cartItems);
   }
 

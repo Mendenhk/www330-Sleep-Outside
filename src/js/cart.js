@@ -45,12 +45,16 @@ function costSumTotal() {
   const cartItems = getLocalStorage("so-cart");
 
   const totalSum = cartItems.reduce((acc, items) => {
-    return acc + (Number(items.FinalPrice) || 0)
+    const quantity = items.quantity || 1;
+    const price = Number(items.FinalPrice) || 0;
+    return acc + (price * quantity);
   }, 0);
   return totalSum
 };
 
 function cartItemTemplate(item) {
+  const quantity = item.quantity || 1;
+  const totalPrice = (Number(item.FinalPrice) || 0) * quantity;
   const newItem = `<li class="cart-card divider">
   <span class="cart-card__remove" data-id="${item.Id}">❌</span>
   <a href="#" class="cart-card__image">
@@ -63,8 +67,8 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
-  <p class="cart-card__price">$${item.FinalPrice}</p>
+  <p class="cart-card__quantity">qty: ${quantity}</p>
+  <p class="cart-card__price">$${totalPrice}</p>
 </li>`;
 
   return newItem;
