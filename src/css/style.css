@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square>div {
+.logo--square > div {
   margin-top: -1.7em;
 }
 
@@ -280,4 +280,25 @@ footer {
   font-size: 1.2rem;
   border: none;
   background: none;
+}
+
+/*----- kriston:  CSS for the backpack superscript ----------*/
+.cart-count {
+  position: absolute;
+  top: 7px;
+  right: -3px;
+
+  background-color: yellowgreen;
+  color: white;
+
+  border-radius: 50%;
+  border: 1px solid gray;
+  width: 18px;
+  height: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.8rem;
 }
