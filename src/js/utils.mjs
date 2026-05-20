@@ -32,3 +32,16 @@ export function renderListWithTemplate(template, parentElement, list, position =
   }
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
+
+
+//kriston: code added to create a superscript on backpack icon
+export function updateCartCount() {
+  const cartItems = getLocalStorage("so-cart") || [];
+  const cartCount = document.querySelector(".cart-count");
+  //remove the if statement when all pages contain the cart count.
+  if (cartCount) {
+    cartCount.textContent = cartItems.length;
+  }
+}
+
+updateCartCount();
