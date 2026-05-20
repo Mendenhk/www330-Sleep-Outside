@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square>div {
+.logo--square > div {
   margin-top: -1.7em;
 }
 
@@ -281,8 +281,6 @@ footer {
   border: none;
   background: none;
 }
-
-
 
 /*----- kriston:  CSS for the backpack superscript ----------*/
 .cart-count {

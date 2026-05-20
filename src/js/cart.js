@@ -6,15 +6,15 @@ function renderCartContents() {
   <p class="cart-total"> </p></div>`;
 
   if (cartItems == null) {
-    console.log("localStorage array is null.")
+    console.log("localStorage array is null.");
   } else {
     const htmlItems = cartItems.map((item) => cartItemTemplate(item));
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
 
-    const TotalCost = costSumTotal()
-    const DisplayElement = document.querySelector(".cart-footer")
+    const TotalCost = costSumTotal();
+    const DisplayElement = document.querySelector(".cart-footer");
     if (DisplayElement.style.display === 0) {
-      DisplayElement.style.display = "block"
+      DisplayElement.style.display = "block";
     }
 
     const totalCostElement = document.querySelector(".cart-total");
@@ -47,10 +47,10 @@ function costSumTotal() {
   const totalSum = cartItems.reduce((acc, items) => {
     const quantity = items.quantity || 1;
     const price = Number(items.FinalPrice) || 0;
-    return acc + (price * quantity);
+    return acc + price * quantity;
   }, 0);
-  return totalSum
-};
+  return totalSum;
+}
 
 function cartItemTemplate(item) {
   const quantity = item.quantity || 1;
