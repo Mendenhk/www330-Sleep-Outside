@@ -1,23 +1,7 @@
 import { renderListWithTemplate } from "./utils.mjs";
 
-// Current template for Product card //
-// function productCardTemplate(product) {
-//   return `
-//     <li class="product-card">
-//       <a href="./product_pages/index.html?product=${product.Id}">
-//         <img src="${product.Image.replace('./public', '')}" alt="${product.Name}">
-//         <h2>${product.Brand.Name}</h2>
-//         <h3>${product.Name}</h3>
-//         <p class="product-card__price">$${product.FinalPrice}</p>
-//       </a>
-//     </li>
-//   `;
-// }
-
-// Sam Levi Samson - New Product Card Template - Discount Indicator Added at the Cart //
-
+// Current template for Product card with discount indicator
 function productCardTemplate(product) {
-
   const isDiscounted =
     product.FinalPrice < product.SuggestedRetailPrice;
 
@@ -66,12 +50,12 @@ function productCardTemplate(product) {
         }
 
       </a>
-
     </li>
   `;
 }
 
 export default class ProductList {
+  // Extracts JSON files
   constructor(category, dataSource, listElement) {
     this.category = category;
     this.dataSource = dataSource;
@@ -85,7 +69,5 @@ export default class ProductList {
 
   renderList(list) {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
-
   }
-
 }
