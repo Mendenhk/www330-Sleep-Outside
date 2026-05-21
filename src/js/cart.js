@@ -1,5 +1,5 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter, updateCartCount } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
@@ -87,6 +87,13 @@ function cartItemTemplate(item) {
   </li>`;
 }
 
+//kriston: modified loadHeaderFooter to await so the cart subscript will find it.  
 // Initialize
-renderCartContents();
-loadHeaderFooter();
+async function init() {
+  renderCartContents();
+
+  await loadHeaderFooter();
+  updateCartCount();
+}
+
+init();
