@@ -76,4 +76,4 @@ export function updateCartCount() {
   }
 }
 
-updateCartCount();
+// updateCartCount();
