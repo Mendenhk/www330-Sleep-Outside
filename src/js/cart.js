@@ -1,4 +1,5 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
@@ -13,9 +14,10 @@ function renderCartContents() {
 
     const TotalCost = costSumTotal();
     const DisplayElement = document.querySelector(".cart-footer");
-    if (DisplayElement.style.display === 0) {
-      DisplayElement.style.display = "block";
-    }
+    // if (DisplayElement.style.display === 0) {
+    //   DisplayElement.style.display = "block";
+    // } // style.display is a string, not a number - Sam Levi //
+    DisplayElement.style.display = "block";
 
     const totalCostElement = document.querySelector(".cart-total");
     totalCostElement.textContent = `Total: $${TotalCost}`;
@@ -59,7 +61,7 @@ function cartItemTemplate(item) {
   <span class="cart-card__remove" data-id="${item.Id}">❌</span>
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Image}"
+      src="${item.Image.replace("./public", "")}"
       alt="${item.Name}"
     />
   </a>
@@ -75,3 +77,4 @@ function cartItemTemplate(item) {
 }
 
 renderCartContents();
+loadHeaderFooter();
