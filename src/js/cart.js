@@ -1,9 +1,44 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 
+function increaseCartQuantity(id) {
+  let cartItems = getLocalStorage("so-cart") || [];
+
+  cartItems = cartItems.map(item => {
+    if (item.Id === id) {
+      item.quantity = (item.quantity || 1) + 1;
+    }
+    return item;
+  });
+  
+  setLocalStorage("so-cart", cartItems); 
+  renderCartContents();
+}
+
+function decreaseCartQuantity(id) {
+  let cartItems = getLocalStorage("so-cart") || [];
+  
+  cartItems = cartItems.map(item => {
+    if (item.Id === id) {
+      const currentQty = item.quantity || 1;
+      if (currentQty > 1) {
+        item.quantity = currentQty - 1;
+      }
+    }
+    return item;
+  });
+  
+  setLocalStorage("so-cart", cartItems);
+  renderCartContents();
+}
+
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
+
+  const existingFooter = document.querySelector(".cart-footer");
+  if (existingFooter) existingFooter.remove();
   document.querySelector(".products").innerHTML += `<div class="cart-footer">
+  
   <p class="cart-total"> </p></div>`;
 
   if (cartItems == null) {
@@ -27,6 +62,20 @@ function renderCartContents() {
     removeButtons.forEach((button) => {
       button.addEventListener("click", () => {
         removeFromCart(button.dataset.id);
+      });
+    });
+
+    const plusButtons = document.querySelectorAll(".btn-plus");
+    plusButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        increaseCartQuantity(button.dataset.id);
+      });
+    });
+
+    const minusButtons = document.querySelectorAll(".btn-minus");
+    minusButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        decreaseCartQuantity(button.dataset.id);
       });
     });
   }
@@ -69,7 +118,11 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: ${quantity}</p>
+  <p class="cart-card__quantity">
+    <button class="btn-plus" data-id="${item.Id}">+</button>
+    qty: ${quantity}
+    <button class="btn-minus" data-id="${item.Id}">-</button>
+  </p>
   <p class="cart-card__price">$${totalPrice}</p>
 </li>`;
 
