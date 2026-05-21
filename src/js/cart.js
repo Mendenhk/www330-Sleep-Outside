@@ -1,29 +1,43 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
-loadHeaderFooter();
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
-  
-  // Clear and prepare the product list area
+
+  // Clear the product list
   document.querySelector(".product-list").innerHTML = "";
 
   if (!cartItems || cartItems.length === 0) {
-    document.querySelector(".products").innerHTML = "<p>Your cart is empty.</p>";
+    document.querySelector(".products").innerHTML = `
+      <h2>My Cart</h2>
+      <p>Your cart is empty.</p>
+    `;
     return;
   }
 
+  // Render cart items
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 
+  // === FIX: Create footer if it doesn't exist ===
+  let footerElement = document.querySelector(".cart-footer");
+  if (!footerElement) {
+    footerElement = document.createElement("div");
+    footerElement.className = "cart-footer";
+    footerElement.innerHTML = `<p class="cart-total"></p>`;
+    document.querySelector(".products").appendChild(footerElement);
+  }
+
   const TotalCost = costSumTotal();
-  const DisplayElement = document.querySelector(".cart-footer");
-  DisplayElement.style.display = "block";
+
+  footerElement.style.display = "block";
 
   const totalCostElement = document.querySelector(".cart-total");
-  totalCostElement.textContent = `Total: $${TotalCost.toFixed(2)}`;
+  if (totalCostElement) {
+    totalCostElement.textContent = `Total: $${TotalCost.toFixed(2)}`;
+  }
 
-  // Attach event listeners to all remove buttons
+  // Attach remove button listeners
   const removeButtons = document.querySelectorAll(".cart-card__remove");
   removeButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -32,11 +46,11 @@ function renderCartContents() {
   });
 }
 
-// Remove an item from the cart and re-render
+// Remove item
 function removeFromCart(id) {
   let cartItems = getLocalStorage("so-cart") || [];
   const itemIndex = cartItems.findIndex((item) => item.Id === id);
-  
+
   if (itemIndex > -1) {
     cartItems.splice(itemIndex, 1);
     setLocalStorage("so-cart", cartItems);
@@ -44,9 +58,9 @@ function removeFromCart(id) {
   }
 }
 
+// Calculate total
 function costSumTotal() {
   const cartItems = getLocalStorage("so-cart") || [];
-  
   return cartItems.reduce((acc, item) => {
     const quantity = item.quantity || 1;
     const price = Number(item.FinalPrice) || 0;
@@ -54,6 +68,7 @@ function costSumTotal() {
   }, 0);
 }
 
+// Cart item template
 function cartItemTemplate(item) {
   const quantity = item.quantity || 1;
   const totalPrice = (Number(item.FinalPrice) || 0) * quantity;
@@ -61,10 +76,7 @@ function cartItemTemplate(item) {
   return `<li class="cart-card divider">
     <span class="cart-card__remove" data-id="${item.Id}">❌</span>
     <a href="#" class="cart-card__image">
-      <img
-        src="${item.Image.replace("./public", "")}"
-        alt="${item.Name}"
-      />
+      <img src="${item.Image.replace("./public", "")}" alt="${item.Name}" />
     </a>
     <a href="#">
       <h2 class="card__name">${item.Name}</h2>
@@ -75,5 +87,6 @@ function cartItemTemplate(item) {
   </li>`;
 }
 
-// Initialize cart
+// Initialize
 renderCartContents();
+loadHeaderFooter();
