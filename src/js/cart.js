@@ -1,4 +1,5 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
@@ -60,7 +61,7 @@ function cartItemTemplate(item) {
   <span class="cart-card__remove" data-id="${item.Id}">❌</span>
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Image.replace('./public', '')}"
+      src="${item.Image.replace("./public", "")}"
       alt="${item.Name}"
     />
   </a>
@@ -76,3 +77,4 @@ function cartItemTemplate(item) {
 }
 
 renderCartContents();
+loadHeaderFooter();
