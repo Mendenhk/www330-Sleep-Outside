@@ -315,7 +315,7 @@ button {
   }
 
   .product-card img {
-    height: 320px;
+    height: auto;
   }
 }
 
