@@ -239,12 +239,13 @@ button {
 
 .product-detail {
   padding: 1em;
-  max-width: 500px;
+  max-width: 650px;
   margin: auto;
 }
 
 .product-detail img {
   width: 100%;
+  height: auto;
 }
 
 /* Start cart list card styles */
@@ -293,7 +294,7 @@ button {
 
 @media screen and (min-width: 500px) {
   body {
-    max-width: 1080px;
+    max-width: 1350px;
     margin: auto;
   }
 
@@ -304,6 +305,17 @@ button {
   .cart-card {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
+  }
+
+
+
+  /* Change Product image sizes based on screen sizes */
+  .product-list {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+
+  .product-card img {
+    height: 320px;
   }
 }
 
