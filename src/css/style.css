@@ -346,3 +346,40 @@ footer {
 
   font-size: 0.8rem;
 }
+
+/* Lonnie: CSS for categories */
+.categories {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;;
+}
+.categories li {
+  list-style: none;
+  padding: 0.5rem 1rem;
+  border: 2px black solid;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+}
+.categories a {
+  text-decoration: none;
+  color: var(--dark-grey);
+}
+.categories li:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+.categories ul {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 1rem;
+}
+
+@media screen and (min-width: 48rem) {
+  .categories {
+    justify-content: center;
+  }
+  .categories ul {
+    display: flex;
+  }
+}
