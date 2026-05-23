@@ -10,14 +10,14 @@ function increaseCartQuantity(id) {
     }
     return item;
   });
-  
-  setLocalStorage("so-cart", cartItems); 
+
+  setLocalStorage("so-cart", cartItems);
   renderCartContents();
 }
 
 function decreaseCartQuantity(id) {
   let cartItems = getLocalStorage("so-cart") || [];
-  
+
   cartItems = cartItems.map(item => {
     if (item.Id === id) {
       const currentQty = item.quantity || 1;
@@ -27,7 +27,7 @@ function decreaseCartQuantity(id) {
     }
     return item;
   });
-  
+
   setLocalStorage("so-cart", cartItems);
   renderCartContents();
 }
@@ -120,7 +120,7 @@ function cartItemTemplate(item) {
   return `<li class="cart-card divider">
     <span class="cart-card__remove" data-id="${item.Id}">❌</span>
     <a href="#" class="cart-card__image">
-      <img src="${item.Image.replace("./public", "")}" alt="${item.Name}" />
+      <img src="${item.Image}" alt="${item.Name}" />
     </a>
     <a href="#">
       <h2 class="card__name">${item.Name}</h2>

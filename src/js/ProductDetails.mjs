@@ -44,11 +44,11 @@ function productDetailsTemplate(product) {
 
   document.querySelector("h2").textContent = product.Category.charAt(0).toUpperCase() + product.Category.slice(1);
   // Brand name
-  document.querySelector("productBrand").textContent = product.Brand.Name;
+  document.querySelector("#productBrand").textContent = product.Brand.Name;
   // Product title
-  document.querySelector("productName").textContent = product.NameWithoutBrand;
+  document.querySelector("#productName").textContent = product.NameWithoutBrand;
 
-  const productImage = document.querySelector("productImage");
+  const productImage = document.querySelector("#productImage");
   productImage.src = product.Images.PrimaryLarge;
 
   // Fix image path for product pages
