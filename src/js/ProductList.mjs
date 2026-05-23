@@ -27,7 +27,7 @@ function productCardTemplate(product) {
       <a href="./product_pages/index.html?product=${product.Id}">
 
         <img
-          src="${product.Image.replace('./public', '')}"
+          src="${product.Images.PrimaryMedium}"
           alt="${product.Name}"
         >
 
@@ -63,7 +63,7 @@ export default class ProductList {
   }
 
   async init() {
-    const list = await this.dataSource.getData();
+    const list = await this.dataSource.getData(this.category);
     this.renderList(list);
   }
 
