@@ -22,7 +22,7 @@ export default class ProductDetails {
     const cartItems = getLocalStorage("so-cart") || [];
     // Check if product already exists in cart
     const existingItem = cartItems.find((item) => item.Id === this.product.Id);
-    
+
     if (existingItem) {
       // If product exists, increment quantity
       existingItem.quantity = (existingItem.quantity || 1) + 1;
@@ -31,7 +31,7 @@ export default class ProductDetails {
       this.product.quantity = 1;
       cartItems.push(this.product);
     }
-    
+
     setLocalStorage("so-cart", cartItems);
   }
 
@@ -41,16 +41,18 @@ export default class ProductDetails {
 }
 
 function productDetailsTemplate(product) {
+
+  document.querySelector("h2").textContent = product.Category.charAt(0).toUpperCase() + product.Category.slice(1);
   // Brand name
-  document.querySelector("h3").textContent = product.Brand.Name;
-
+  document.querySelector("productBrand").textContent = product.Brand.Name;
   // Product title
-  document.querySelector("h2").textContent = product.NameWithoutBrand;
+  document.querySelector("productName").textContent = product.NameWithoutBrand;
 
-  const productImage = document.getElementById("productImage");
+  const productImage = document.querySelector("productImage");
+  productImage.src = product.Images.PrimaryLarge;
 
   // Fix image path for product pages
-  productImage.src = product.Image.replace("./public", "");
+  //productImage.src = product.Image.replace("./public", "");
   productImage.alt = product.NameWithoutBrand;
 
   document.getElementById("productPrice").textContent = `$${product.FinalPrice}`;

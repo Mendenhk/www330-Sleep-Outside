@@ -24,16 +24,16 @@ function productCardTemplate(product) {
           : ""
       }
 
-      <a href="./product_pages/index.html?product=${product.Id}">
+      <a href="/product_pages/?product=${product.Id}">
 
         <img
           src="${product.Images.PrimaryMedium}"
           alt="${product.Name}"
         >
 
-        <h2>${product.Brand.Name}</h2>
+        <h3>${product.Brand.Name}</h3>
 
-        <h3>${product.Name}</h3>
+        <p>${product.Name}</p>
 
         <p class="product-card__price">
           $${product.FinalPrice}
