@@ -176,6 +176,13 @@ button {
 }
 /* End product grid */
 
+.alert-list p {
+  margin: 0;
+  padding: 1rem;
+  text-align: center;
+  font-weight: bold;
+  line-height: 1.35;
+}
 .products {
   margin-top: 2rem;
   padding: 1rem;
