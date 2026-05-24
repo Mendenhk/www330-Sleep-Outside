@@ -1,0 +1,40 @@
+[
+  {
+    "type": "test",
+    "message": "This is only a test",
+    "background": "darkblue",
+    "color": "white"
+  },
+  {
+    "enabled": false,
+    "note": "Disabled example for a different alert scenario.",
+    "type": "info",
+    "message": "New arrivals are landing this week. Check back for fresh trail gear.",
+    "background": "#174ea6",
+    "color": "white"
+  },
+  {
+    "enabled": false,
+    "note": "Disabled example for a different alert scenario.",
+    "type": "sale",
+    "message": "Weekend deal: save 20% on selected tents while supplies last.",
+    "background": "#31572c",
+    "color": "white"
+  },
+  {
+    "enabled": false,
+    "note": "Disabled example for a different alert scenario.",
+    "type": "shipping",
+    "message": "Free shipping on orders over $75.",
+    "background": "#f0a868",
+    "color": "#303030"
+  },
+  {
+    "enabled": false,
+    "note": "Disabled example for a different alert scenario.",
+    "type": "notice",
+    "message": "Holiday delivery cutoff: order by December 15 for standard shipping.",
+    "background": "#8a470c",
+    "color": "white"
+  }
+]
