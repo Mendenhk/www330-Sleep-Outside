@@ -1,7 +1,7 @@
 import { renderListWithTemplate } from "./utils.mjs";
 
 // Current template for Product card with discount indicator
-function productCardTemplate(product) {
+function productCardTemplate(product, category) {
   const isDiscounted =
     product.FinalPrice < product.SuggestedRetailPrice;
 
@@ -24,10 +24,10 @@ function productCardTemplate(product) {
           : ""
       }
 
-      <a href="./product_pages/index.html?product=${product.Id}">
+      <a href="/product_pages/index.html?product=${product.Id}&category=${category}">
 
         <img
-          src="${product.Image.replace('./public', '')}"
+          src="${product.Images.PrimaryMedium}"
           alt="${product.Name}"
         >
 
@@ -63,11 +63,17 @@ export default class ProductList {
   }
 
   async init() {
-    const list = await this.dataSource.getData();
+    const list = await this.dataSource.getData(this.category);
     this.renderList(list);
   }
 
   renderList(list) {
-    renderListWithTemplate(productCardTemplate, this.listElement, list);
+    renderListWithTemplate(
+      (product) => productCardTemplate(product, this.category),
+      this.listElement,
+      list,
+      "afterbegin",
+      true,
+    );
   }
 }

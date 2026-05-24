@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+  <title>hammock</title>
+  <!-- Left post/tree trunk -->
+  <line x1="15" y1="20" x2="15" y2="85" />
+  <!-- Right post/tree trunk -->
+  <line x1="85" y1="20" x2="85" y2="85" />
+  
+  <!-- Left support ropes -->
+  <line x1="15" y1="35" x2="30" y2="48" />
+  <line x1="15" y1="45" x2="30" y2="48" />
+  <!-- Right support ropes -->
+  <line x1="85" y1="35" x2="70" y2="48" />
+  <line x1="85" y1="45" x2="70" y2="48" />
+  
+  <!-- The main hammock sling curve -->
+  <path d="M30,48 C40,65 60,65 70,48" fill="none" />
+  <!-- The secondary curve forming the bed of the hammock -->
+  <path d="M30,48 C40,72 60,72 70,48" fill="none" />
+  
+  <!-- Mesh patterns on hammock -->
+  <path d="M36,52 C45,63 55,63 64,52" stroke-width="2" stroke-dasharray="1,2" />
+  <path d="M40,56 C45,64 55,64 60,56" stroke-width="2" stroke-dasharray="1,2" />
+</svg>
