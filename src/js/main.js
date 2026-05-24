@@ -1,18 +1,11 @@
-import ProductData from "./ProductData.mjs";
-import ProductList from "./ProductList.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
-import { updateCartCount } from "./utils.mjs";
 
-const dataSource = new ProductData("tents");
+loadHeaderFooter();
+//kriston: modified loadHeaderFooter to await so the cart subscript will find it.
+// async function init() {
+//   productList.init();
+//   await loadHeaderFooter();
+//   updateCartCount();
+// }
 
-const element = document.querySelector(".product-list");
-const productList = new ProductList("Tents", dataSource, element);
-
-//kriston: modified loadHeaderFooter to await so the cart subscript will find it.  
-async function init() {
-  productList.init();
-  await loadHeaderFooter();
-  updateCartCount();
-}
-
-init();
+// init();

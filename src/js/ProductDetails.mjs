@@ -50,7 +50,7 @@ function productDetailsTemplate(product) {
   const productImage = document.getElementById("productImage");
 
   // Fix image path for product pages
-  productImage.src = product.Image.replace("./public", "");
+  productImage.src = product.Images.PrimaryLarge;
   productImage.alt = product.NameWithoutBrand;
 
   document.getElementById("productPrice").textContent = `$${product.FinalPrice}`;

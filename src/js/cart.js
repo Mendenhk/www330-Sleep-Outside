@@ -4,21 +4,21 @@ import { loadHeaderFooter, updateCartCount } from "./utils.mjs";
 function increaseCartQuantity(id) {
   let cartItems = getLocalStorage("so-cart") || [];
 
-  cartItems = cartItems.map(item => {
+  cartItems = cartItems.map((item) => {
     if (item.Id === id) {
       item.quantity = (item.quantity || 1) + 1;
     }
     return item;
   });
-  
-  setLocalStorage("so-cart", cartItems); 
+
+  setLocalStorage("so-cart", cartItems);
   renderCartContents();
 }
 
 function decreaseCartQuantity(id) {
   let cartItems = getLocalStorage("so-cart") || [];
-  
-  cartItems = cartItems.map(item => {
+
+  cartItems = cartItems.map((item) => {
     if (item.Id === id) {
       const currentQty = item.quantity || 1;
       if (currentQty > 1) {
@@ -27,7 +27,7 @@ function decreaseCartQuantity(id) {
     }
     return item;
   });
-  
+
   setLocalStorage("so-cart", cartItems);
   renderCartContents();
 }
@@ -120,7 +120,7 @@ function cartItemTemplate(item) {
   return `<li class="cart-card divider">
     <span class="cart-card__remove" data-id="${item.Id}">❌</span>
     <a href="#" class="cart-card__image">
-      <img src="${item.Image.replace("./public", "")}" alt="${item.Name}" />
+      <img src="${item.Images.PrimaryMedium}" alt="${item.Name}" />
     </a>
     <a href="#">
       <h2 class="card__name">${item.Name}</h2>
@@ -135,7 +135,7 @@ function cartItemTemplate(item) {
   </li>`;
 }
 
-//kriston: modified loadHeaderFooter to await so the cart subscript will find it.  
+//kriston: modified loadHeaderFooter to await so the cart subscript will find it.
 // Initialize
 async function init() {
   renderCartContents();

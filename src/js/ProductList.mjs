@@ -2,53 +2,31 @@ import { renderListWithTemplate } from "./utils.mjs";
 
 // Current template for Product card with discount indicator
 function productCardTemplate(product) {
-  const isDiscounted =
-    product.FinalPrice < product.SuggestedRetailPrice;
+  const isDiscounted = product.FinalPrice < product.SuggestedRetailPrice;
 
   const discountPercent = Math.round(
     ((product.SuggestedRetailPrice - product.FinalPrice) /
       product.SuggestedRetailPrice) *
-      100
+    100
   );
 
   return `
     <li class="product-card">
+      ${isDiscounted
+      ? `<span class="discount-badge">${discountPercent}% OFF</span>`
+      : ""
+    }
 
-      ${
-        isDiscounted
-          ? `
-        <span class="discount-badge">
-          ${discountPercent}% OFF
-        </span>
-      `
-          : ""
-      }
+      <a href="/product_pages/?product=${product.Id}">
+        <img src="${product.Images.PrimaryMedium}" alt="${product.Name}">
+        <h3>${product.Brand.Name}</h3>
+        <p>${product.NameWithoutBrand}</p>
+        <p class="product-card__price">$${product.FinalPrice}</p>
 
-      <a href="./product_pages/index.html?product=${product.Id}">
-
-        <img
-          src="${product.Image.replace('./public', '')}"
-          alt="${product.Name}"
-        >
-
-        <h2>${product.Brand.Name}</h2>
-
-        <h3>${product.Name}</h3>
-
-        <p class="product-card__price">
-          $${product.FinalPrice}
-        </p>
-
-        ${
-          isDiscounted
-            ? `
-          <p class="original-price">
-            $${product.SuggestedRetailPrice}
-          </p>
-        `
-            : ""
-        }
-
+        ${isDiscounted
+      ? `<p class="original-price">$${product.SuggestedRetailPrice}</p>`
+      : ""
+    }
       </a>
     </li>
   `;
@@ -63,8 +41,9 @@ export default class ProductList {
   }
 
   async init() {
-    const list = await this.dataSource.getData();
+    const list = await this.dataSource.getData(this.category);
     this.renderList(list);
+    document.querySelector(".title").textContent = this.category;
   }
 
   renderList(list) {
