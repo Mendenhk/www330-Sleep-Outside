@@ -116,11 +116,12 @@ function costSumTotal() {
 function cartItemTemplate(item) {
   const quantity = item.quantity || 1;
   const totalPrice = (Number(item.FinalPrice) || 0) * quantity;
+  const image = item.Images?.PrimaryMedium || item.Image;
 
   return `<li class="cart-card divider">
     <span class="cart-card__remove" data-id="${item.Id}">❌</span>
     <a href="#" class="cart-card__image">
-      <img src="${item.Images.PrimaryMedium}" alt="${item.Name}" />
+      <img src="${image}" alt="${item.Name}" />
     </a>
     <a href="#">
       <h2 class="card__name">${item.Name}</h2>
