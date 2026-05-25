@@ -43,10 +43,28 @@ export default class ProductList {
   async init() {
     const list = await this.dataSource.getData(this.category);
     this.renderList(list);
+    this.createBreadcrumb(list);
     document.querySelector(".title").textContent = this.category;
   }
 
   renderList(list) {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
+  }
+
+  // Sam Levi Created Breadcrumb //
+
+  createBreadcrumb(list) {
+
+    const breadcrumb =
+      document.querySelector(".breadcrumb");
+
+    if (!breadcrumb) return;
+
+    breadcrumb.innerHTML = `
+      <a href="../index.html">
+        ${this.category}
+      </a>
+      → (${list.length} items)
+    `;
   }
 }

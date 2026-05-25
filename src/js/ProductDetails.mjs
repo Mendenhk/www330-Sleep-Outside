@@ -13,6 +13,7 @@ export default class ProductDetails {
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
     this.renderProductDetails();
+    this.createBreadcrumb(); // Sam Levi added breadcrumb
 
     // once the HTML is rendered, add a listener to the Add to Cart button
     // Notice the .bind(this). This callback will not work if the bind(this) is missing.
@@ -43,6 +44,13 @@ export default class ProductDetails {
 
   renderProductDetails() {
     productDetailsTemplate(this.product);
+  }
+
+  // Sam Levi: added breadcrumb
+  createBreadcrumb() {
+    const breadcrumb = document.querySelector(".breadcrumb");
+    if (!breadcrumb) return;
+    breadcrumb.innerHTML = `<a href="../index.html"> Tents </a>`;
   }
 }
 
