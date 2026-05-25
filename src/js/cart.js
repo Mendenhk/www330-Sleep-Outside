@@ -1,5 +1,7 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
-import { loadHeaderFooter, updateCartCount } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, updateCartCount } from "./utils.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
+
+loadHeaderFooter();
 
 function increaseCartQuantity(id) {
   let cartItems = getLocalStorage("so-cart") || [];
@@ -12,6 +14,7 @@ function increaseCartQuantity(id) {
   });
 
   setLocalStorage("so-cart", cartItems);
+  updateCartCount();
   renderCartContents();
 }
 
@@ -29,6 +32,7 @@ function decreaseCartQuantity(id) {
   });
 
   setLocalStorage("so-cart", cartItems);
+  updateCartCount();
   renderCartContents();
 }
 
@@ -98,6 +102,9 @@ function removeFromCart(id) {
   if (itemIndex > -1) {
     cartItems.splice(itemIndex, 1);
     setLocalStorage("so-cart", cartItems);
+    //kriston: below updates cart icon
+    updateCartCount();
+
     renderCartContents();
   }
 }
@@ -136,13 +143,5 @@ function cartItemTemplate(item) {
   </li>`;
 }
 
-//kriston: modified loadHeaderFooter to await so the cart subscript will find it.
 // Initialize
-async function init() {
   renderCartContents();
-
-  await loadHeaderFooter();
-  updateCartCount();
-}
-
-init();
