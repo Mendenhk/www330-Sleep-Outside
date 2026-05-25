@@ -353,8 +353,6 @@ button {
     grid-template-columns: 150px auto 15%;
   }
 
-
-
   /* Change Product image sizes based on screen sizes */
   .product-list {
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));

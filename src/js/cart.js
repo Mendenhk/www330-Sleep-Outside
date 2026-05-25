@@ -144,4 +144,4 @@ function cartItemTemplate(item) {
 }
 
 // Initialize
-  renderCartContents();
+renderCartContents();
