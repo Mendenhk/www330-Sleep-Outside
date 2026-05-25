@@ -59,6 +59,8 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
+
+  updateCartCount();
 }
 
 
@@ -70,10 +72,14 @@ export async function loadHeaderFooter() {
 export function updateCartCount() {
   const cartItems = getLocalStorage("so-cart") || [];
   const cartCount = document.querySelector(".cart-count");
-  //remove the if statement when all pages contain the cart count.
+
+  const totalItems = cartItems.reduce((total, item) => {
+    return total + (item.quantity || 1);
+  }, 0);
+
+  // remove the if statement when all pages contain the cart count.
   if (cartCount) {
-    cartCount.textContent = cartItems.length;
+    cartCount.textContent = totalItems;
   }
 }
 
-// updateCartCount();

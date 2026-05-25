@@ -1,5 +1,8 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
+//kriston: below added for backpack superscript cart counter
+import { updateCartCount } from "./utils.mjs";
+
 export default class ProductDetails {
   constructor(productId, dataSource) {
     this.productId = productId;
@@ -33,6 +36,9 @@ export default class ProductDetails {
     }
     
     setLocalStorage("so-cart", cartItems);
+
+    //kriston: below renders the cart icon and updates number
+    updateCartCount();
   }
 
   renderProductDetails() {
