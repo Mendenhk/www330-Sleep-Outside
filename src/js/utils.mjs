@@ -61,12 +61,22 @@ export async function loadHeaderFooter() {
   renderWithTemplate(footerTemplate, footerElement);
 
   updateCartCount();
+  initSearch();
 }
 
 
+export function initSearch() {
+  const searchForm = document.querySelector(".search-form");
+  if (!searchForm) return;
 
-
-
+  searchForm.addEventListener ("submit", (event) => {
+    event.preventDefault();
+    const query = document.querySelector(".search-input").value.trim();
+    if (query) {
+      window.location.href = `/product_listing/index.html?category=${encodeURIComponent(query)}`;
+    }
+  });
+}
 
 //kriston: code added to create a superscript on backpack icon
 export function updateCartCount() {
