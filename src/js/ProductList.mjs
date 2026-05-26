@@ -2,31 +2,43 @@ import { renderListWithTemplate } from "./utils.mjs";
 
 // Current template for Product card with discount indicator
 function productCardTemplate(product) {
-  const isDiscounted = product.FinalPrice < product.SuggestedRetailPrice;
+  const isDiscounted =
+    product.FinalPrice < product.SuggestedRetailPrice;
 
   const discountPercent = Math.round(
     ((product.SuggestedRetailPrice - product.FinalPrice) /
       product.SuggestedRetailPrice) *
-    100
+      100
   );
 
   return `
     <li class="product-card">
-      ${isDiscounted
-      ? `<span class="discount-badge">${discountPercent}% OFF</span>`
-      : ""
-    }
+
+      ${
+        isDiscounted
+          ? `<span class="discount-badge">${discountPercent}% OFF</span>`
+          : ""
+      }
 
       <a href="/product_pages/?product=${product.Id}">
-        <img src="${product.Images.PrimaryMedium}" alt="${product.Name}">
-        <h3>${product.Brand.Name}</h3>
-        <p>${product.NameWithoutBrand}</p>
-        <p class="product-card__price">$${product.FinalPrice}</p>
+        <img
+          src="${product.Images.PrimaryMedium}"
+          alt="${product.Name}"
+        />
 
-        ${isDiscounted
-      ? `<p class="original-price">$${product.SuggestedRetailPrice}</p>`
-      : ""
-    }
+        <h3>${product.Brand.Name}</h3>
+
+        <p>${product.NameWithoutBrand}</p>
+
+        <p class="product-card__price">
+          $${product.FinalPrice}
+        </p>
+
+        ${
+          isDiscounted
+            ? `<p class="original-price">$${product.SuggestedRetailPrice}</p>`
+            : ""
+        }
       </a>
     </li>
   `;
@@ -54,17 +66,13 @@ export default class ProductList {
   // Sam Levi Created Breadcrumb //
 
   createBreadcrumb(list) {
-
-    const breadcrumb =
-      document.querySelector(".breadcrumb");
-
+    const breadcrumb = document.querySelector(".breadcrumb");
+  
     if (!breadcrumb) return;
-
-    breadcrumb.innerHTML = `
-      <a href="../index.html">
-        ${this.category}
-      </a>
-      → (${list.length} items)
+  
+    breadcrumb.innerHTML = `<a href="../index.html">Home</a> &gt;
+      <span>${this.category}</span>
+      (${list.length} items)
     `;
   }
 }

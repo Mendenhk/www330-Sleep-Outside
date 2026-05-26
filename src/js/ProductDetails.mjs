@@ -50,7 +50,7 @@ export default class ProductDetails {
   createBreadcrumb() {
     const breadcrumb = document.querySelector(".breadcrumb");
     if (!breadcrumb) return;
-    breadcrumb.innerHTML = `<a href="../index.html"> Tents </a>`;
+    breadcrumb.innerHTML = `<a href="../index.html">Home</a> &gt; Tents`;
   }
 }
 
