@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, updateCartCount } from "./utils.mjs";
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -33,6 +33,7 @@ export default class ProductDetails {
     }
     
     setLocalStorage("so-cart", cartItems);
+    updateCartCount();
   }
 
   renderProductDetails() {
@@ -50,7 +51,7 @@ function productDetailsTemplate(product) {
   const productImage = document.getElementById("productImage");
 
   // Fix image path for product pages
-  productImage.src = product.Image.replace("./public", "");
+  productImage.src = product.Images?.PrimaryLarge || product.Image || "";
   productImage.alt = product.NameWithoutBrand;
 
   document.getElementById("productPrice").textContent = `$${product.FinalPrice}`;

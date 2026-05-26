@@ -7,10 +7,10 @@
   <title>Sleep Outside | Home</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
 
   <!-- JavaScript -->
-  <script src="/js/main.js" type="module"></script>
+    <script src="../js/product_listing.js" type="module"></script>
 </head>
 
 <body>
@@ -43,26 +43,12 @@
       </div>
     </section>
 
-    <section class="categories divider">
-      <h2>Shop by category</h2>
-      <div class="category-grid">
-        <a class="category-card" href="/product_listing/index.html?category=tents">
-          <img src="/images/category-tents.svg" alt="Tents" />
-          <span>Tents</span>
-        </a>
-        <a class="category-card" href="/product_listing/index.html?category=backpacks">
-          <img src="/images/category-backpacks.svg" alt="Backpacks" />
-          <span>Backpacks</span>
-        </a>
-        <a class="category-card" href="/product_listing/index.html?category=sleeping-bags">
-          <img src="/images/category-sleepingbags.svg" alt="Sleeping Bags" />
-          <span>Sleeping Bags</span>
-        </a>
-        <a class="category-card" href="/product_listing/index.html?category=hammocks">
-          <img src="/images/category-hammocks.svg" alt="Hammocks" />
-          <span>Hammocks</span>
-        </a>
-      </div>
+    <!-- PRODUCTS -->
+    <section class="products">
+      <h2 id="products-heading">Top Products</h2>
+
+      <!-- PRODUCTS FROM JSON -->
+      <ul class="product-list"></ul>
     </section>
   </main>
 

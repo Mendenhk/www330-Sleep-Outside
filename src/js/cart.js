@@ -1,5 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
-import { loadHeaderFooter, updateCartCount } from "./utils.mjs";
+import { loadHeaderFooter, updateCartCount, getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 function increaseCartQuantity(id) {
   let cartItems = getLocalStorage("so-cart") || [];
@@ -116,11 +115,13 @@ function costSumTotal() {
 function cartItemTemplate(item) {
   const quantity = item.quantity || 1;
   const totalPrice = (Number(item.FinalPrice) || 0) * quantity;
+  const imageUrl =
+    item.Images?.PrimaryMedium || item.Images?.PrimaryLarge || item.Image || "";
 
   return `<li class="cart-card divider">
     <span class="cart-card__remove" data-id="${item.Id}">❌</span>
     <a href="#" class="cart-card__image">
-      <img src="${item.Image.replace("./public", "")}" alt="${item.Name}" />
+      <img src="${imageUrl}" alt="${item.Name}" />
     </a>
     <a href="#">
       <h2 class="card__name">${item.Name}</h2>

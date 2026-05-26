@@ -24,12 +24,12 @@ function productCardTemplate(product) {
           : ""
       }
 
-      <a href="./product_pages/index.html?product=${product.Id}">
+      <a href="../product_pages/index.html?product=${product.Id}">
 
-        <img
-          src="${product.Image.replace('./public', '')}"
-          alt="${product.Name}"
-        >
+          <img
+            src="${product.Images?.PrimaryMedium || product.Image || ""}"
+            alt="${product.Name}"
+          >
 
         <h2>${product.Brand.Name}</h2>
 
@@ -63,7 +63,7 @@ export default class ProductList {
   }
 
   async init() {
-    const list = await this.dataSource.getData();
+    const list = await this.dataSource.getData(this.category);
     this.renderList(list);
   }
 
