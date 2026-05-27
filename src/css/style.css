@@ -337,8 +337,6 @@ button {
     grid-template-columns: 150px auto 15%;
   }
 
-
-
   /* Change Product image sizes based on screen sizes */
   .product-list {
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -431,8 +429,6 @@ footer {
 
 /* End search bar styles */
 
-
-
 /* Price Sorting Button Styles */
 
 .products-header {
@@ -443,7 +439,7 @@ footer {
   flex-wrap: wrap;
   gap: 1rem;
 }
- 
+
 .sort-button {
   padding: 0.6em 1.5em;
   background-color: var(--primary-color);
@@ -459,47 +455,72 @@ footer {
   transition: all 0.3s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
- 
+
 .sort-button:hover {
   background-color: var(--tertiary-color);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
- 
+
 .sort-button:active {
   transform: translateY(0);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
- 
+
 .sort-icon {
   font-size: 1.2rem;
   font-weight: bold;
   transition: transform 0.3s ease;
 }
- 
+
 /* Different states for sort button */
 .sort-button.sorted-desc {
   background-color: var(--secondary-color);
 }
- 
+
 .sort-button.sorted-asc {
   background-color: var(--secondary-color);
 }
- 
+
 .sort-button.sorted-desc:hover,
 .sort-button.sorted-asc:hover {
   background-color: var(--tertiary-color);
 }
- 
+
 /* Responsive adjustments */
 @media screen and (max-width: 500px) {
   .products-header {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .sort-button {
     width: 100%;
     justify-content: center;
   }
+}
+
+/* Kriston:  CSS for the sort by name button */
+.name-sort-button {
+  background-color: var(--tertiary-color);
+  color: white;
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.name-sort-button:hover {
+  background-color: var(--tertiary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.name-sort-button:active {
+  transform: translateY(0);
+  box-shadow: none;
 }

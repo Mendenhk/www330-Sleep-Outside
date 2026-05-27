@@ -50,6 +50,10 @@ export default class ProductList {
     document.querySelector(".title").textContent = this.category;
     // attach sort button listener
     this.setupSort();
+
+    //Kriston: added to create sort by name button
+    const nameSort = document.getElementById("sort-by-name");
+    nameSort.addEventListener("click", () => this.sortList("Name"));
   }
 
   renderList(list) {
@@ -69,5 +73,18 @@ export default class ProductList {
       });
       this.renderList(this.products);
     });
+  }
+
+  //kriston: method added to generate sort by name list.  Can also sort by other categories if needed.
+  sortList(category) {
+    this.products.sort((a, b) => {
+      if (typeof a[category] === "number") {
+        return a[category] - b[category];
+      } else {
+        return a[category].localeCompare(b[category]);
+      }
+    });
+
+    this.renderList(this.products);
   }
 }
