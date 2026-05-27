@@ -41,12 +41,32 @@ export default class ProductList {
   }
 
   async init() {
-    const list = await this.dataSource.getData(this.category);
-    this.renderList(list);
+    this.list = await this.dataSource.getData(this.category);
+    // console.log(this.list);
+    this.renderList(this.list);
     document.querySelector(".title").textContent = this.category;
+
+    //kriston: below-code for sort buttons to render sorted list
+    const priceSort = document.getElementById("sort-by-price");
+    const nameSort = document.getElementById("sort-by-name");
+    nameSort.addEventListener("click", () => this.sortList("Name"));
+    priceSort.addEventListener("click", () => this.sortList("FinalPrice"));
   }
 
   renderList(list) {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
+  }
+
+  //kriston: adding a sorting method
+  sortList(category) {
+    this.list.sort((a, b) => {
+      if (typeof a[category] === "number") {
+        return a[category] - b[category];
+      } else {
+        return a[category].localeCompare(b[category]);
+      }
+    });
+
+    this.renderList(this.list);
   }
 }

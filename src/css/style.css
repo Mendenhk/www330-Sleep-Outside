@@ -337,8 +337,6 @@ button {
     grid-template-columns: 150px auto 15%;
   }
 
-
-
   /* Change Product image sizes based on screen sizes */
   .product-list {
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -387,4 +385,35 @@ footer {
   justify-content: center;
 
   font-size: 0.8rem;
+}
+
+/*----- kriston:  CSS for sort button ----------*/
+.sort-button {
+  background-color: var(--tertiary-color);
+  color: white;
+
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+
+  padding: 0.6rem 1rem;
+  margin-top: 0.5rem;
+  /* margin-left: 1rem; */
+
+  font-size: 0.9rem;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.sort-button:hover {
+  background-color: var(--tertiary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.sort-button:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
