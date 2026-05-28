@@ -1,9 +1,21 @@
 import { getLocalStorage } from "./utils.mjs";
 
+function formDataToJSON(formElement) {
+  const formData = new FormData(formElement);
+  const order = {};
+
+  formData.forEach((value, key) => {
+    order[key] = value;
+  });
+
+  return order;
+}
+
 export default class CheckoutProcess {
-  constructor(key, outputSelector) {
+  constructor(key, outputSelector, services) {
     this.key = key;
     this.outputSelector = outputSelector;
+    this.services = services;
     this.cartItems = [];
     this.itemTotal = 0;
     this.shippingCost = 0;
@@ -31,6 +43,58 @@ export default class CheckoutProcess {
       this.cartItems.length > 0 ? 10 + (this.cartItems.length - 1) * 2 : 0;
     this.orderTotal = this.itemTotal + this.tax + this.shippingCost;
     this.displayOrderSummary();
+  }
+
+  packageItems(items) {
+    return items.map((item) => ({
+      id: item.Id,
+      name: item.Name,
+      price: item.FinalPrice,
+      quantity: item.quantity || 1,
+    }));
+  }
+
+  normalizeCardNumber(cardNumber) {
+    return cardNumber.replace(/\D/g, "");
+  }
+
+  normalizeExpirationDate(expirationDate) {
+    const [month, year] = expirationDate.split("/");
+
+    if (year.length === 2) {
+      return `${month}/20${year}`;
+    }
+
+    return expirationDate;
+  }
+
+  async checkout(formElement) {
+    const formData = formDataToJSON(formElement);
+    const cardNumber = this.normalizeCardNumber(formData["card-number"]);
+    const expiration = this.normalizeExpirationDate(
+      formData["expiration-date"],
+    );
+
+    this.calculateOrderTotal();
+
+    const order = {
+      orderDate: new Date().toISOString(),
+      fname: formData["first-name"],
+      lname: formData["last-name"],
+      street: formData["street-address"],
+      city: formData.city,
+      state: formData.state,
+      zip: formData.zip,
+      cardNumber,
+      expiration,
+      code: formData.cvv,
+      items: this.packageItems(this.cartItems),
+      orderTotal: this.orderTotal.toFixed(2),
+      shipping: Number(this.shippingCost.toFixed(2)),
+      tax: this.tax.toFixed(2),
+    };
+
+    return this.services.checkout(order);
   }
 
   displayItemSubtotal() {
