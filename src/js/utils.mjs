@@ -1,3 +1,5 @@
+const baseURL = import.meta.env.VITE_SERVER_URL;
+
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
 }
@@ -67,14 +69,18 @@ export async function loadHeaderFooter() {
 
 export function initSearch() {
   const searchForm = document.querySelector(".search-form");
+
   if (!searchForm) return;
 
-  searchForm.addEventListener ("submit", (event) => {
+  searchForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const query = document.querySelector(".search-input").value.trim();
+
+
     if (query) {
       window.location.href = `/product_listing/index.html?category=${encodeURIComponent(query)}`;
     }
+
   });
 }
 
