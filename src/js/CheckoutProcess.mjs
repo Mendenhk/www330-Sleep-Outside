@@ -69,32 +69,30 @@ export default class CheckoutProcess {
   }
 
   async checkout(formElement) {
-    const formData = formDataToJSON(formElement);
-    const cardNumber = this.normalizeCardNumber(formData["card-number"]);
-    const expiration = this.normalizeExpirationDate(
-      formData["expiration-date"],
-    );
+    const formElement = document.forms["checkout"];
 
-    this.calculateOrderTotal();
+    const json = formDataToJSON(formElement);
+    // add totals, and item details
+    json.orderDate = new Date();
+    json.orderTotal = this.orderTotal;
+    json.tax = this.tax;
+    json.shipping = this.shipping;
+    json.items = packageItems(this.list);
+    console.log(json);
+    try {
+      const res = await services.checkout(json);
+      console.log(res);
+      setLocalStorage("so-cart", []);
+      location.assign("/checkout/success.html");
+    } catch (err) {
+      // get rid of any preexisting alerts.
+      removeAllAlerts();
+      for (let message in err.message) {
+        alertMessage(err.message[message]);
+      }
 
-    const order = {
-      orderDate: new Date().toISOString(),
-      fname: formData["first-name"],
-      lname: formData["last-name"],
-      street: formData["street-address"],
-      city: formData.city,
-      state: formData.state,
-      zip: formData.zip,
-      cardNumber,
-      expiration,
-      code: formData.cvv,
-      items: this.packageItems(this.cartItems),
-      orderTotal: this.orderTotal.toFixed(2),
-      shipping: Number(this.shippingCost.toFixed(2)),
-      tax: this.tax.toFixed(2),
-    };
-
-    return this.services.checkout(order);
+      console.log(err);
+    }
   }
 
   displayItemSubtotal() {
