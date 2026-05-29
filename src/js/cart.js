@@ -59,7 +59,10 @@ function renderCartContents() {
   if (!footerElement) {
     footerElement = document.createElement("div");
     footerElement.className = "cart-footer";
-    footerElement.innerHTML = `<p class="cart-total"></p>`;
+    footerElement.innerHTML = `
+      <p class="cart-total"></p>
+      <a class="checkout-link" href="../checkout/">Checkout</a>
+    `;
     document.querySelector(".products").appendChild(footerElement);
   }
 
