@@ -650,6 +650,59 @@ footer {
   font-size: var(--large-font);
 }
 
+
+#giveawayModal {
+  position: relative;
+
+  width: 90%;
+  max-width: 500px;
+
+  padding: 1rem;
+  margin: 2rem auto;
+
+  border: 2px solid white;
+  border-radius: 1.5rem;
+
+  background-color: var(--primary-color);
+  color: var(--dark-grey);
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+#giveawayModal::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+#closeModal {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  padding: 0.25rem 0.5rem;
+
+  font-size: 1.25rem;
+
+  border: none;
+  outline: none;
+  border-radius: 999px;
+  background-color: var(--secondary-color);
+  color: var(--light-grey);
+
+  cursor: pointer;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+#giveawayModal h2 {
+  margin-top: 0;
+  font-size: 2rem;
+}
+#giveawayModal p {
+  line-height: 1.6;
+  color: var(--dark-grey);
+}
+
+
 @media screen and (min-width: 700px) {
   .checkout {
     grid-template-columns: minmax(0, 2fr) minmax(260px, 0.9fr);
