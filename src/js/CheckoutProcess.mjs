@@ -93,8 +93,20 @@ export default class CheckoutProcess {
       shipping: Number(this.shippingCost.toFixed(2)),
       tax: this.tax.toFixed(2),
     };
+    try {
+      const res = await this.services.checkout(order);
+      console.log(res);
+      setLocalStorage("so-cart", []);
+      location.assign("/checkout/success.html");
+    } catch (err) {
+      // get rid of any preexisting alerts.
+      removeAllAlerts();
+      for (let message in err.message) {
+        alertMessage(err.message[message]);
+      }
 
-    return this.services.checkout(order);
+      console.log(err);
+    }
   }
 
   displayItemSubtotal() {
