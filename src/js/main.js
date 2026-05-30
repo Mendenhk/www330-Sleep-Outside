@@ -8,11 +8,7 @@ loadHeaderFooter();
 const dataSource = new ExternalServices("tents");
 const element = document.querySelector(".product-list");
 const productList = new ProductList("Tents", dataSource, element);
-const alert = new Alert();
-
-
-
-
+const siteAlert = new Alert();
 
 const modal = document.getElementById("giveawayModal");
 const closeBtn = document.getElementById("closeModal");
@@ -40,3 +36,17 @@ modal.addEventListener("click", (e) => {
   }
 });
 
+// Newsletter signup
+const newsletterForm = document.getElementById("newsletter-form");
+
+if (newsletterForm) {
+  newsletterForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const email = document.getElementById("newsletter-email").value;
+
+    alert(`Thank you for subscribing with ${email}!`);
+
+    newsletterForm.reset();
+  });
+}
