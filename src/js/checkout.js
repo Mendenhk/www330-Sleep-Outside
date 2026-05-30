@@ -26,9 +26,11 @@ checkoutForm.addEventListener("submit", async (event) => {
 
   try {
     await checkoutProcess.checkout(checkoutForm);
-    alert("Order submitted successfully.");
+    localStorage.removeItem("so-cart");
+    window.location.href = "./success.html";
   } catch (error) {
-    alert(`There was a problem submitting your order: ${error.message}`);
+    const cleanError = error.message.substring(error.message.indexOf(":") + 1).trim().replaceAll("{", "").replaceAll("}", "");
+    alert(`There was a problem submitting your order: ${cleanError}`);
   }
 });
 

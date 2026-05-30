@@ -94,7 +94,19 @@ export default class CheckoutProcess {
       tax: this.tax.toFixed(2),
     };
 
-    return this.services.checkout(order);
+    try {
+      const result = await this.services.checkout(order);
+      return result;
+    } catch (err) {
+      console.error("CheckoutProcess.checkout error:", err);
+      let message;
+      if (err && err.message) {
+        message = typeof err.message === "string" ? err.message : JSON.stringify(err.message);
+      } else {
+        message = JSON.stringify(err);
+      }
+      throw new Error(message);
+    }
   }
 
   displayItemSubtotal() {
