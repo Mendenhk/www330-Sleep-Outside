@@ -49,6 +49,12 @@ export default class ProductList {
     this.renderList(this.products);
     document.querySelector(".title").textContent = this.category;
     // attach sort button listener
+    console.log(list)
+    const query = "marmot"
+    const testing = list.filter(product => product.Name.toLowerCase().includes(query.toLowerCase()))
+    console.log(testing)
+
+
     this.setupSort();
 
     //Kriston: added to create sort by name button
@@ -59,6 +65,7 @@ export default class ProductList {
   renderList(list) {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
   }
+
 
   setupSort() {
     const sortButton = document.getElementById("sort-btn");
