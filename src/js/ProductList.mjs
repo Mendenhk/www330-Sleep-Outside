@@ -41,13 +41,43 @@ export default class ProductList {
     // NEW: store products + sort state
     this.products = [];
     this.sortAsc = true;
+
+    this.sortProducts = []
+
+    //build an all product lis
+    this.back = [];
+    this.ham = [];
+    this.sleep = [];
+    this.ten = [];
+    this.all = [];
   }
 
   async init() {
     const list = await this.dataSource.getData(this.category);
     this.products = list;
-    this.renderList(this.products);
     document.querySelector(".title").textContent = this.category;
+    //search for specific product by name, 
+    const list2 = await this.dataSource.getData("backpacks");
+    const list3 = await this.dataSource.getData("hammocks");
+    const list4 = await this.dataSource.getData("sleeping-bags");
+    const list5 = await this.dataSource.getData("tents");
+
+    // all product list build
+    this.back = list2;
+    this.ham = list3;
+    this.sleep = list4;
+    this.ten = list5;
+
+    const allProduct = [...list2, ...list3, ...list4, ...list5]
+    this.all = allProduct
+    //if category is not tents, backpacks, sleeping-bags, or hammocks
+    //then run searchList function, otherwise render list as normal.
+    if (this.category == "tents" || this.category == "backpacks" || this.category == "sleeping-bags" || this.category == "hammocks") {
+      this.renderList(this.products);
+    } else {
+      this.searchList(this.category)
+    }
+
     // attach sort button listener
     this.setupSort();
 
@@ -56,9 +86,21 @@ export default class ProductList {
     nameSort.addEventListener("click", () => this.sortList("Name"));
   }
 
+  searchList(query) {
+
+
+
+    let testing = this.all.filter(product => product.Name.toLowerCase().includes(query.toLowerCase()))
+    console.log(testing)
+
+    this.sortProducts = testing;
+    this.renderList(this.sortProducts)
+  }
+
   renderList(list) {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
   }
+
 
   setupSort() {
     const sortButton = document.getElementById("sort-btn");
