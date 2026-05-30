@@ -1,3 +1,4 @@
+//kriston: next figure out how to make my colors change
 import { renderListWithTemplate } from "./utils.mjs";
 
 // Current template for Product card with discount indicator
@@ -21,8 +22,13 @@ function productCardTemplate(product) {
         <img src="${product.Images.PrimaryMedium}" alt="${product.Name}">
         <h3>${product.Brand.Name}</h3>
         <p>${product.NameWithoutBrand}</p>
-        <p class="product-card__price">$${product.FinalPrice}</p>
 
+        <ul class="color-options">
+          <img src="${product.Colors[0].ColorChipImageSrc}">
+          <p class="product_color">Color: ${product.Colors[0].ColorName}</p>
+        </ul>
+        
+        <p class="product-card__price">$${product.FinalPrice}</p>
         ${isDiscounted
       ? `<p class="original-price">$${product.SuggestedRetailPrice}</p>`
       : ""
