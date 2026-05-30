@@ -34,7 +34,7 @@ export function alertMessage(message, scroll = true, duration = 3000) {
 }
 
 export function removeAllAlerts() {
-  const alerts = document.querySelectorAll(".alert");
+  const alerts = document.querySelectorAll(".alert, .alert-list");
   alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
 }
 
@@ -42,10 +42,16 @@ export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const product = urlParams.get(param);
-  return product
+  return product;
 }
 
-export function renderListWithTemplate(template, parentElement, list, position = "afterbegin", clear = false) {
+export function renderListWithTemplate(
+  template,
+  parentElement,
+  list,
+  position = "afterbegin",
+  clear = false,
+) {
   const htmlStrings = list.map(template);
   // if clear is true we need to clear out the contents of the parent.
   if (clear) {
@@ -53,7 +59,6 @@ export function renderListWithTemplate(template, parentElement, list, position =
   }
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
-
 
 export function renderWithTemplate(template, parentElement, data, callback) {
   parentElement.innerHTML = template;
@@ -63,13 +68,11 @@ export function renderWithTemplate(template, parentElement, data, callback) {
   }
 }
 
-
 export async function loadTemplate(path) {
   const response = await fetch(path);
   const template = await response.text();
   return template;
 }
-
 
 export async function loadHeaderFooter() {
   const headerTemplate = await loadTemplate("../partials/header.html");
@@ -85,12 +88,11 @@ export async function loadHeaderFooter() {
   initSearch();
 }
 
-
 export function initSearch() {
   const searchForm = document.querySelector(".search-form");
   if (!searchForm) return;
 
-  searchForm.addEventListener ("submit", (event) => {
+  searchForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const query = document.querySelector(".search-input").value.trim();
     if (query) {
@@ -113,4 +115,3 @@ export function updateCartCount() {
     cartCount.textContent = totalItems;
   }
 }
-

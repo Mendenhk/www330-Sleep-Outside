@@ -1,11 +1,23 @@
-const baseURL = import.meta.env.VITE_SERVER_URL;
+const baseURL = import.meta.env.DEV ? "/api/" : import.meta.env.VITE_SERVER_URL;
 
 async function convertToJson(res) {
-  const data = await res.json();
+  const responseText = await res.text();
+  let data = responseText;
+
+  try {
+    data = responseText ? JSON.parse(responseText) : {};
+  } catch (error) {
+    data = responseText || res.statusText;
+  }
+
   if (res.ok) {
     return data;
   } else {
-    throw { name: 'servicesError', message: data || message };
+    throw {
+      name: "servicesError",
+      message: data || res.statusText,
+      status: res.status,
+    };
   }
 }
 
@@ -39,6 +51,19 @@ export default class ExternalServices {
     };
 
     const response = await fetch(`${baseURL}checkout`, options);
+    return convertToJson(response);
+  }
+
+  async createUser(user) {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    };
+
+    const response = await fetch(`${baseURL}users`, options);
     return convertToJson(response);
   }
 }

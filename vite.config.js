@@ -4,6 +4,16 @@ import { defineConfig } from "vite";
 export default defineConfig({
   root: "src/",
 
+  server: {
+    proxy: {
+      "/api": {
+        target: "https://wdd330-backend.onrender.com",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
+
   build: {
     outDir: "../dist",
     rollupOptions: {
@@ -11,6 +21,7 @@ export default defineConfig({
         main: resolve(__dirname, "src/index.html"),
         cart: resolve(__dirname, "src/cart/index.html"),
         checkout: resolve(__dirname, "src/checkout/index.html"),
+        register: resolve(__dirname, "src/register/index.html"),
         product: resolve(__dirname, "src/product_pages/index.html"),
         product_listing: resolve(__dirname, "src/product_listing/index.html"),
       },
