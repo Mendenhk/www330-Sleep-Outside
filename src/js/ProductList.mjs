@@ -1,7 +1,7 @@
-import { renderListWithTemplate } from "./utils.mjs";
+import { renderListWithTemplate, setBreadcrumb } from "./utils.mjs";
 
 // Current template for Product card with discount indicator
-function productCardTemplate(product) {
+function productCardTemplate(product, category) {
   const isDiscounted = product.FinalPrice < product.SuggestedRetailPrice;
 
   const discountPercent = Math.round(
@@ -10,6 +10,9 @@ function productCardTemplate(product) {
     100
   );
 
+  // Build the product page link with category as a query parameter for breadcrumbs
+  const href = `/product_pages/?product=${product.Id}${category ? `&category=${encodeURIComponent(category)}` : ""}`;
+
   return `
     <li class="product-card">
       ${isDiscounted
@@ -17,7 +20,7 @@ function productCardTemplate(product) {
       : ""
     }
 
-      <a href="/product_pages/?product=${product.Id}">
+      <a href="${href}">
         <img src="${product.Images.PrimaryMedium}" alt="${product.Name}">
         <h3>${product.Brand.Name}</h3>
         <p>${product.NameWithoutBrand}</p>
@@ -73,6 +76,8 @@ export default class ProductList {
     //if category is not tents, backpacks, sleeping-bags, or hammocks
     //then run searchList function, otherwise render list as normal.
     if (this.category == "tents" || this.category == "backpacks" || this.category == "sleeping-bags" || this.category == "hammocks") {
+      // set breadcrumb for category list
+      setBreadcrumb({ type: "list", category: this.category, count: this.products.length });
       this.renderList(this.products);
     } else {
       this.searchList(this.category)
@@ -98,7 +103,7 @@ export default class ProductList {
   }
 
   renderList(list) {
-    renderListWithTemplate(productCardTemplate, this.listElement, list);
+    renderListWithTemplate((p) => productCardTemplate(p, this.category), this.listElement, list);
   }
 
 

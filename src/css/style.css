@@ -36,6 +36,38 @@ header {
   padding: 0.5rem;
 }
 
+/* Breadcrumb styles */
+.breadcrumb {
+  padding: 0.45rem 1rem;
+  font-size: 0.9rem;
+  background: #fff7f0;
+  color: var(--dark-grey);
+  border-top: 1px solid var(--light-grey);
+  max-width: 1350px;
+  margin: 0 auto;
+}
+.breadcrumb .crumb-sep {
+  margin: 0 0.4rem;
+  color: var(--secondary-color);
+}
+.breadcrumb .crumb-count {
+  color: var(--tertiary-color);
+  font-weight: bold;
+}
+.breadcrumb .crumb-link {
+  color: inherit;
+  text-decoration: none;
+  font-weight: bold;
+}
+.breadcrumb .crumb-link:hover {
+  text-decoration: underline;
+}
+.breadcrumb .crumb-product {
+  margin-left: 0.4rem;
+  color: var(--dark-grey);
+  font-weight: normal;
+}
+
 p {
   padding: 0.75rem;
 }
