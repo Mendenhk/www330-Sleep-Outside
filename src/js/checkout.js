@@ -3,7 +3,11 @@ import CheckoutProcess from "./CheckoutProcess.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 const services = new ExternalServices();
-const checkoutProcess = new CheckoutProcess("so-cart", "#order-summary", services);
+const checkoutProcess = new CheckoutProcess(
+  "so-cart",
+  "#order-summary",
+  services,
+);
 const checkoutForm = document.querySelector(".checkout-form");
 
 checkoutProcess.init();
@@ -29,7 +33,11 @@ checkoutForm.addEventListener("submit", async (event) => {
     localStorage.removeItem("so-cart");
     window.location.href = "./success.html";
   } catch (error) {
-    const cleanError = error.message.substring(error.message.indexOf(":") + 1).trim().replaceAll("{", "").replaceAll("}", "");
+    const cleanError = error.message
+      .substring(error.message.indexOf(":") + 1)
+      .trim()
+      .replaceAll("{", "")
+      .replaceAll("}", "");
     alert(`There was a problem submitting your order: ${cleanError}`);
   }
 });

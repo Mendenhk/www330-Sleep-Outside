@@ -278,6 +278,45 @@ button {
   height: auto;
 }
 
+.newsletter {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.newsletter h2 {
+  margin-bottom: 0.5rem;
+}
+
+.newsletter p {
+  margin-bottom: 1.5rem;
+}
+
+.newsletter-form,
+#newsletter-form {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+#newsletter-email {
+  padding: 0.75rem;
+  min-width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#newsletter-form button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 /* Start cart list card styles */
 .cart-card {
   display: grid;
@@ -650,7 +689,6 @@ footer {
   font-size: var(--large-font);
 }
 
-
 #giveawayModal {
   position: relative;
 
@@ -701,7 +739,6 @@ footer {
   line-height: 1.6;
   color: var(--dark-grey);
 }
-
 
 @media screen and (min-width: 700px) {
   .checkout {
