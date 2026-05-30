@@ -1,0 +1,134 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Sleep Outside | Create Account</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <script src="../js/register.js" type="module"></script>
+  </head>
+
+  <body>
+    <header id="main-header" class="divider"></header>
+
+    <main class="divider">
+      <section class="products account">
+        <h2>Create your Account</h2>
+        <form class="account-form" method="post">
+          <div class="account-form__section account-form__section--name">
+            <p>Customer Name</p>
+            <input
+              type="text"
+              name="first-name"
+              id="first-name"
+              placeholder="First Name"
+              autocomplete="given-name"
+              required
+            />
+            <input
+              type="text"
+              name="last-name"
+              id="last-name"
+              placeholder="Last Name"
+              autocomplete="family-name"
+              required
+            />
+          </div>
+
+          <div class="account-form__section account-form__section--contact">
+            <p>Login Details</p>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email Address"
+              autocomplete="email"
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+              autocomplete="new-password"
+              minlength="8"
+              required
+            />
+            <input
+              type="password"
+              name="confirm-password"
+              id="confirm-password"
+              placeholder="Confirm Password"
+              autocomplete="new-password"
+              minlength="8"
+              required
+            />
+          </div>
+
+          <div class="account-form__section account-form__section--address">
+            <p>Address</p>
+            <input
+              type="text"
+              name="street-address"
+              id="street-address"
+              placeholder="Street Address"
+              autocomplete="street-address"
+              required
+            />
+            <input
+              type="text"
+              name="city"
+              id="city"
+              placeholder="City"
+              autocomplete="address-level2"
+              required
+            />
+            <input
+              type="text"
+              name="state"
+              id="state"
+              placeholder="State"
+              autocomplete="address-level1"
+              required
+            />
+            <input
+              type="text"
+              name="zip"
+              id="zip"
+              placeholder="Zip Code"
+              inputmode="numeric"
+              autocomplete="postal-code"
+              required
+            />
+          </div>
+
+          <div class="account-form__section account-form__section--avatar">
+            <p>Avatar</p>
+            <div class="avatar-preview" aria-live="polite">
+              <img
+                class="avatar-preview__image"
+                src="../images/category-backpacks.svg"
+                alt="Avatar preview"
+              />
+            </div>
+            <input
+              type="file"
+              name="avatar"
+              id="avatar"
+              accept="image/png, image/jpeg, image/webp"
+            />
+          </div>
+
+          <button type="submit">Create Account</button>
+        </form>
+      </section>
+    </main>
+
+    <footer id="main-footer"></footer>
+  </body>
+</html>
