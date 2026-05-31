@@ -15,7 +15,7 @@ function productCardTemplate(product, category) {
   const href = `/product_pages/?product=${product.Id}${category ? `&category=${encodeURIComponent(category)}` : ""}`;
 
   return `
-    <li class="product-card" data-product-id="${product.Id}">
+    <li class="product-card" data-product-id="${product.Id}" data-href="${href}">
       ${isDiscounted
       ? `<span class="discount-badge">${discountPercent}% OFF</span>`
       : ""
@@ -124,13 +124,12 @@ export default class ProductList {
     });
     
     const chooseColorButton = document.querySelectorAll(".color-choice-button");
-    chooseColorButton.forEach(button => {
+    chooseColorButton.forEach((button) => {
       button.addEventListener("click", () => {
-        const productId = button.closest(".product-card").dataset.productId;
-        const selectedIndex = button.previousElementSibling.dataset.selectedIndex;
-        //kriston: saving colorIndex to session storage to retrieve on cart, for proper displaying of the correct image.
+        const card = button.closest(".product-card");
+        const selectedIndex = button.previousElementSibling.dataset.selectedIndex || 0;
         sessionStorage.setItem("colorIndex", selectedIndex);
-        window.location.href = `/product_pages/?product=${productId}`;
+        window.location.href = card.dataset.href;
       });
     });
   }
