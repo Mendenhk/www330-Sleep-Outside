@@ -1,6 +1,7 @@
 const baseURL = import.meta.env.DEV ? "/api/" : import.meta.env.VITE_SERVER_URL;
 
 async function convertToJson(res) {
+
   const responseText = await res.text();
   let data = responseText;
 
@@ -20,6 +21,7 @@ async function convertToJson(res) {
     };
   }
 }
+
 
 export default class ExternalServices {
   constructor(category) {
