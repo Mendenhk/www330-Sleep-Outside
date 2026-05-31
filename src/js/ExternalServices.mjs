@@ -10,6 +10,7 @@ async function convertToJson(res) {
   }
 }
 
+
 export default class ExternalServices {
   constructor(category) {
     // this.category = category;
