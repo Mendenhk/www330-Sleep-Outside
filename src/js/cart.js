@@ -124,9 +124,13 @@ function costSumTotal() {
 
 // Cart item template
 function cartItemTemplate(item) {
+  const colorIndex = item.selectedColorIndex || 0;
+  const colorObject = item.Colors[colorIndex];
+  console.log("colorObject = ", colorObject);
+
   const quantity = item.quantity || 1;
   const totalPrice = (Number(item.FinalPrice) || 0) * quantity;
-  const image = item.Images?.PrimaryMedium || item.Image;
+  const image = colorObject.ColorPreviewImageSrc;
 
   return `<li class="cart-card divider">
     <span class="cart-card__remove" data-id="${item.Id}">❌</span>
@@ -136,7 +140,7 @@ function cartItemTemplate(item) {
     <a href="#">
       <h2 class="card__name">${item.Name}</h2>
     </a>
-    <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+    <p class="cart-card__color">${item.Colors[colorIndex].ColorName}</p>
     <p class="cart-card__quantity">
       <button class="btn-plus" data-id="${item.Id}">+</button>
       qty: ${quantity}

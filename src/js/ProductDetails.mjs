@@ -47,22 +47,29 @@ export default class ProductDetails {
 }
 
 function productDetailsTemplate(product) {
+  const colorIndex = sessionStorage.getItem("colorIndex") || 0;
+  product.selectedColorIndex = colorIndex;  
+  sessionStorage.removeItem("colorIndex");
+  const colorObject = product.Colors[colorIndex];
+  console.log("colorObject = ", colorObject);
+  const colorImage = colorObject.ColorPreviewImageSrc;
+
   // Brand name
   document.querySelector("h3").textContent = product.Brand.Name;
 
-  // Product title
+  // Product titlmy pe
   document.querySelector("h2").textContent = product.NameWithoutBrand;
 
   const productImage = document.getElementById("productImage");
 
   // Fix image path for product pages
-  productImage.src = product.Images.PrimaryLarge;
+  productImage.src = colorImage;
   productImage.alt = product.NameWithoutBrand;
 
   document.getElementById("productPrice").textContent = `$${product.FinalPrice}`;
 
   document.getElementById("productColor").textContent =
-    product.Colors[0].ColorName;
+    product.Colors[colorIndex].ColorName;
 
   document.getElementById("productDesc").innerHTML =
     product.DescriptionHtmlSimple;
