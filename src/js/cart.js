@@ -95,6 +95,13 @@ function renderCartContents() {
       decreaseCartQuantity(button.dataset.id);
     });
   });
+
+  const wishlistButtons = document.querySelectorAll(".btn-wishlist");
+  wishlistButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      moveToWishlist(button.dataset.id);
+    });
+  });
 }
 
 // Remove item
@@ -110,6 +117,29 @@ function removeFromCart(id) {
 
     renderCartContents();
   }
+}
+
+function moveToWishlist(id) {
+  let cartItems = getLocalStorage("so-cart") || [];
+  let wishlistItems = getLocalStorage("so-wishlist") || [];
+
+  const product = cartItems.find((item) => item.Id === id);
+
+  if (!product) return;
+
+  const alreadyExists = wishlistItems.find((item) => item.Id === id);
+
+  if (!alreadyExists) {
+    wishlistItems.push(product);
+    setLocalStorage("so-wishlist", wishlistItems);
+  }
+
+  cartItems = cartItems.filter((item) => item.Id !== id);
+
+  setLocalStorage("so-cart", cartItems);
+
+  updateCartCount();
+  renderCartContents();
 }
 
 // Calculate total
@@ -145,6 +175,12 @@ function cartItemTemplate(item) {
       <button class="btn-plus" data-id="${item.Id}">+</button>
       qty: ${quantity}
       <button class="btn-minus" data-id="${item.Id}">-</button>
+    </p>
+
+    <p>
+      <button class="btn-wishlist" data-id="${item.Id}">
+        ❤️ Move to Wishlist
+      </button>
     </p>
     <p class="cart-card__price">$${totalPrice.toFixed(2)}</p>
   </li>`;
