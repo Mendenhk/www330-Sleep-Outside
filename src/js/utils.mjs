@@ -84,8 +84,71 @@ export async function loadHeaderFooter() {
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
 
+  // ensure breadcrumb element exists as a sibling after header so it sits below header border
+  let breadcrumbEl = document.getElementById("site-breadcrumb");
+  if (!breadcrumbEl) {
+    breadcrumbEl = document.createElement("nav");
+    breadcrumbEl.id = "site-breadcrumb";
+    breadcrumbEl.className = "breadcrumb";
+    breadcrumbEl.setAttribute("aria-label", "Breadcrumb");
+    breadcrumbEl.style.display = "none";
+    headerElement.insertAdjacentElement("afterend", breadcrumbEl);
+  }
+  setBreadcrumb();
+
   updateCartCount();
   initSearch();
+}
+
+function prettifyCategory(raw) {
+  if (!raw) return "";
+  return raw
+    .replace(/[-_]/g, " ")
+    .split(" ")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
+export function setBreadcrumb({ type, category, count, productName } = {}) {
+  const crumbElement = document.getElementById("site-breadcrumb");
+  if (!crumbElement) return;
+
+  // hide when no breadcrumb data provided
+  if (!type) {
+    crumbElement.style.display = "none";
+    crumbElement.innerHTML = "";
+    return;
+  }
+
+  const pretty = prettifyCategory(category);
+
+  if (type === "list") {
+    const href = category ? `/product_listing/index.html?category=${encodeURIComponent(category)}` : "#";
+    crumbElement.innerHTML = `<a class="crumb-link" href="${href}"><span class="crumb-cat">${pretty}</span></a> <span class="crumb-sep">-&gt;</span> <span class="crumb-count">(${count} items)</span>`;
+    crumbElement.style.display = "block";
+    return;
+  }
+
+  if (type === "product") {
+    // product page shows category as a link back to the listing when available
+    if (category) {
+      const href = `/product_listing/index.html?category=${encodeURIComponent(category)}`;
+      if (productName) {
+        // show: Category -> Product Name
+        crumbElement.innerHTML = `<a class="crumb-link" href="${href}"><span class="crumb-cat">${pretty}</span></a> <span class="crumb-sep">-&gt;</span> <span class="crumb-product">${productName}</span>`;
+      } else {
+        crumbElement.innerHTML = `<a class="crumb-link" href="${href}"><span class="crumb-cat">${pretty}</span></a>`;
+      }
+    } else {
+      crumbElement.innerHTML = `<span class="crumb-cat">${pretty || "Products"}</span>`;
+    }
+    crumbElement.style.display = "block";
+    return;
+  }
+
+  // hide by default if type is not found
+  crumbElement.style.display = "none";
+  crumbElement.innerHTML = "";
 }
 
 export function initSearch() {
