@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, setBreadcrumb, getParam } from "./utils.mjs";
 
 //kriston: below added for backpack superscript cart counter
 import { updateCartCount } from "./utils.mjs";
@@ -12,6 +12,12 @@ export default class ProductDetails {
 
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
+    // determine category of product for breadcrumbs
+    const categoryParam = getParam("category");
+    const inferredCategory = this.product?.Category?.Name || this.product?.CategoryName || document.querySelector(".title")?.textContent || null;
+    const category = categoryParam || inferredCategory;
+    const productName = this.product?.NameWithoutBrand || this.product?.Name || null;
+    setBreadcrumb({ type: "product", category, productName });
     this.renderProductDetails();
 
     // once the HTML is rendered, add a listener to the Add to Cart button
