@@ -1,4 +1,11 @@
-const baseURL = import.meta.env.DEV ? "/api/" : import.meta.env.VITE_SERVER_URL;
+const normalizeUrl = (url) => {
+  if (!url) return "";
+  return url.replace(/\/+$/, "") + "/";
+};
+
+const baseURL = import.meta.env.DEV
+  ? "/api/"
+  : normalizeUrl(import.meta.env.VITE_SERVER_URL || "https://wdd330-backend.onrender.com/");
 
 async function convertToJson(res) {
 
