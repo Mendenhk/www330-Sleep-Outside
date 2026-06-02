@@ -1,0 +1,250 @@
+/* =========================================================
+   CUSTOMER REVIEWS SECTION
+   Append everything below to the bottom of style.css
+   ========================================================= */
+
+.reviews-section {
+  max-width: 650px;
+  margin: 2rem auto;
+  padding: 1.5rem 1rem;
+}
+
+/* Header row: title + summary score */
+.reviews-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.reviews-title {
+  font-size: 1.4rem;
+  color: var(--dark-grey);
+}
+
+/* Summary score block (avg + stars + count) */
+.summary-score {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.summary-avg {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--secondary-color);
+  line-height: 1;
+}
+
+.summary-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.summary-count {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.no-reviews-msg {
+  font-size: 0.9rem;
+  color: #888;
+  font-style: italic;
+  padding: 0;
+}
+
+/* ── Star display (read-only) ───────────────────────────── */
+.star {
+  font-size: 1.1rem;
+}
+
+.star.filled {
+  color: #f5a623;
+}
+
+.star.half {
+  color: #f5a623;
+  opacity: 0.6;
+}
+
+.star.empty {
+  color: #ccc;
+}
+
+/* ── Individual review cards ────────────────────────────── */
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.review-card {
+  background: #fafafa;
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+}
+
+.review-card__header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.reviewer-name {
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: var(--dark-grey);
+}
+
+.review-stars {
+  display: flex;
+  gap: 1px;
+}
+
+.review-date {
+  font-size: 0.8rem;
+  color: #999;
+  margin-left: auto;
+}
+
+.review-body {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #444;
+  padding: 0;
+  margin: 0;
+}
+
+/* ── Write-a-review form ────────────────────────────────── */
+.review-form-container {
+  border-top: 2px solid var(--primary-color);
+  padding-top: 1.5rem;
+}
+
+.review-form-title {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: var(--dark-grey);
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--dark-grey);
+}
+
+.form-group input,
+.form-group textarea {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 0.55em 0.8em;
+  border: 1px solid var(--light-grey);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--primary-color);
+}
+
+/* ── Interactive star input ─────────────────────────────── */
+.star-input {
+  display: flex;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.star-btn {
+  font-size: 1.8rem;
+  color: #ccc;
+  transition: color 0.15s ease, transform 0.1s ease;
+  user-select: none;
+  line-height: 1;
+}
+
+.star-btn:hover,
+.star-btn.active {
+  color: #f5a623;
+  transform: scale(1.15);
+}
+
+.rating-label {
+  font-size: 0.85rem;
+  color: #888;
+  font-style: italic;
+}
+
+/* ── Character count ────────────────────────────────────── */
+.char-count {
+  font-size: 0.8rem;
+  color: #999;
+  text-align: right;
+}
+
+/* ── Submit button ──────────────────────────────────────── */
+.submit-review-btn {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6em 2em;
+  font-size: 1rem;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.2s ease;
+  margin: 0;
+}
+
+.submit-review-btn:hover {
+  background-color: var(--tertiary-color);
+}
+
+/* ── Validation error ───────────────────────────────────── */
+.review-error {
+  color: #cc0000;
+  font-size: 0.85rem;
+  min-height: 1.2em;
+  padding: 0;
+  margin: 0;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media screen and (max-width: 500px) {
+  .reviews-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .review-date {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .submit-review-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
