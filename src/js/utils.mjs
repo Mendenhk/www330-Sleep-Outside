@@ -173,8 +173,13 @@ export function updateCartCount() {
     return total + (item.quantity || 1);
   }, 0);
 
-  //animate cart icon
-  
+  const cartIcon = document.querySelector(".cart")
+  cartIcon.classList.add("flash-it")
+
+  cartIcon.addEventListener("animationend", () => {
+    cartIcon.classList.remove("flash-it")
+  })
+
 
   // remove the if statement when all pages contain the cart count.
   if (cartCount) {

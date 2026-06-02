@@ -126,7 +126,7 @@ function costSumTotal() {
 function cartItemTemplate(item) {
   const colorIndex = item.selectedColorIndex || 0;
   const colorObject = item.Colors[colorIndex];
-  console.log("colorObject = ", colorObject);
+  //console.log("colorObject = ", colorObject);
 
   const quantity = item.quantity || 1;
   const totalPrice = (Number(item.FinalPrice) || 0) * quantity;
