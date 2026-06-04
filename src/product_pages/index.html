@@ -17,12 +17,20 @@
       <section class="product-detail">
         <h2>Brand Name</h2>
         <h3 class="divider">Product</h3>
-        <img
-          src="/images/noun_Tent_2517.svg"
-          alt="Sleep Outside Camping Products"
-          id="productImage"
-          class="divider"
-        />
+        
+        
+
+        <div class="carousel" id="productCarousel">
+          <div class="carousel-main">
+            <button class="carousel-btn carousel-btn--prev" id="carouselPrev">&#8592;</button>
+            <img src="/images/noun_Tent_2517.svg" alt="Sleep Outside Camping Products" id="productImage" class="divider" />
+            <button class="carousel-btn carousel-btn--next" id="carouselNext">&#8594;</button>
+          </div>
+          <div class="carousel-thumbnails" id="carouselThumbnails"></div>
+        </div>
+
+
+
         <p id="productPrice" class="product-card__price">$000.99</p>
         <p id="productColor" class="product__color">Color</p>
         <p id="productDesc" class="product__description">Description</p>
