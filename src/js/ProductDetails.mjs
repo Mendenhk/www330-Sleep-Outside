@@ -151,6 +151,55 @@ function productDetailsTemplate(product) {
     "addToCart"
   ).dataset.id = product.Id;
 
+  
+
+  // Carousel logic using Colors
+  const thumbnailsContainer = document.getElementById("carouselThumbnails");
+  if (thumbnailsContainer) {
+    thumbnailsContainer.innerHTML = "";
+
+    if (product.Colors && product.Colors.length > 1) {
+      let currentIndex = Number(colorIndex);
+
+      function updateCarousel(index) {
+        const color = product.Colors[index];
+        document.getElementById("productImage").src = color.ColorPreviewImageSrc;
+        document.getElementById("productColor").textContent = color.ColorName;
+        document.querySelectorAll(".carousel-thumb").forEach((t, i) => {
+          t.classList.toggle("active", i === index);
+        });
+        currentIndex = index;
+      }
+
+      product.Colors.forEach((color, index) => {
+        const thumb = document.createElement("img");
+        thumb.src = color.ColorPreviewImageSrc;
+        thumb.alt = color.ColorName;
+        thumb.classList.add("carousel-thumb");
+        if (index === currentIndex) thumb.classList.add("active");
+
+        thumb.addEventListener("click", () => updateCarousel(index));
+        thumbnailsContainer.appendChild(thumb);
+      });
+
+      const prevBtn = document.getElementById("carouselPrev");
+      const nextBtn = document.getElementById("carouselNext");
+
+      if (prevBtn && nextBtn) {
+        prevBtn.addEventListener("click", () => {
+          const newIndex = (currentIndex - 1 + product.Colors.length) % product.Colors.length;
+          updateCarousel(newIndex);
+        });
+
+        nextBtn.addEventListener("click", () => {
+          const newIndex = (currentIndex + 1) % product.Colors.length;
+          updateCarousel(newIndex);
+        });
+      }
+    }
+  }
+
+
   const wishlistButton =
     document.getElementById("addToWishlist");
 
